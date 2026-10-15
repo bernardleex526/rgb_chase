@@ -1,0 +1,35 @@
+follow_perception:
+  ros__parameters:
+    detector_model: "/opt/dog_follow/models/yolox_s.engine"   # .onnx works too (slower)
+    detector_input_size: 640
+    reid_model: "/opt/dog_follow/models/osnet_x0_25.engine"
+    pose_model: ""                 # optional RTMPose ONNX: improves range when feet are out of view
+    range_source: "mono"           # mono | depth
+    depth_scale: 0.001             # uint16 depth -> metres (RealSense). ZED publishes float32 metres.
+    camera_height: 0.45            # MEASURE on the robot: lens centre above ground (m)
+    camera_pitch_deg: 0.0          # MEASURE: positive = tilted down
+    person_height: 1.70
+    reid_accept: 0.75
+    reid_reject: 0.45
+    lost_timeout: 10.0
+    publish_debug_image: true
+
+follow_controller:
+  ros__parameters:
+    rate: 30.0
+    target_timeout: 0.5
+    enabled_on_start: false        # call /follow_controller/enable to start moving
+    follow_distance: 1.5
+    distance_deadband: 0.15
+    min_distance: 0.8
+    kp_dist: 0.6
+    kd_dist: 0.1
+    kp_yaw: 1.2
+    kd_yaw: 0.05
+    max_vx: 0.5                    # start low on real hardware
+    max_vx_reverse: 0.2
+    max_wz: 0.6
+    max_ax: 0.6
+    max_aw: 1.5
+    search_wz: 0.35
+    search_timeout: 8.0

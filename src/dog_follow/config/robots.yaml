@@ -1,0 +1,22 @@
+m20_adapter:
+  ros__parameters:
+    sdk_ns: "/rl_deploy"
+    rate: 50.0                 # SDK zeroes velocity after 0.25 s without input
+    input_timeout: 0.3
+    max_vx: 0.5                # SDK default caps: 0.7 / 0.5 / 0.7
+    max_vx_reverse: 0.2
+    max_vy: 0.0
+    max_wz: 0.6
+    auto_stand: false          # true: send stand, then rl_control after stand_settle_time
+    stand_settle_time: 3.0
+
+robot_adapter:
+  ros__parameters:
+    output_topic: "/cmd_vel"
+    rate: 50.0
+    input_timeout: 0.3
+    max_vx: 0.5
+    max_vx_reverse: 0.2
+    max_vy: 0.0
+    max_wz: 0.6
+    output_best_effort: false
